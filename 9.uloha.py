@@ -19,10 +19,9 @@ def basin_finder(table: list, first: int, second: int, value: list):
     value.append(exist(table, first, second - 1))
     value = [val for val in value if val is not None if val[0] >= 0 if val[1] >= 0]
     table[first][second] = 9
-    result = 0
     for first, second in value:
-        result += basin_finder(table, first, second, [])
-    return result
+        basin_finder(table, first, second, [])
+   
 
 
 def day_9_part_2(table: str):
@@ -30,7 +29,7 @@ def day_9_part_2(table: str):
     basins = []
     for line in range(len(table)):
         for value in range(len(table[line])):
-            if table[line][value] is None or table[line][value] == 9:
+            if table[line][value] == 9:
                 continue
             before_count = len([None for line in table for value in line if value == 9])
             basin_finder(table, line, value, [])
